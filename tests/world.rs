@@ -18,7 +18,7 @@ async fn fetch_test_world() {
 
 #[tokio::test]
 async fn fetch_all_worlds() {
-    let mut client = Client::new();
+    let client = Client::new();
     let world = client.get_all_worlds().await;
 
     if let Ok(world) = world {

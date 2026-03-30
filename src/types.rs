@@ -57,3 +57,10 @@ impl Player {
         client.get_player_worlds_by_uuid(&self.uuid).await
     }
 }
+
+
+#[derive(Deserialize,Debug,Serialize)]
+pub struct Stats {
+    player_count:u16,
+    timestamp:String
+}

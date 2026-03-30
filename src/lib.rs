@@ -29,8 +29,3 @@ impl From<serde_json::Error> for Error {
         Error::SerdeError(e.to_string())
     }
 }
-
-pub async fn quick_get_world(uuid: &str) -> Result<World, Error> {
-    let mut client: Client = Client::new();
-    client.get_world_by_uuid(uuid).await
-}
