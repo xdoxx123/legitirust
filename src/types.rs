@@ -1,5 +1,8 @@
 use serde::Deserialize;
 use serde::Serialize;
+
+use crate::Error;
+use crate::client::Client;
 #[derive(Deserialize, Debug,Serialize)]
 pub struct World {
     #[serde(rename = "_id")]
@@ -21,4 +24,36 @@ pub struct World {
     pub version: String,
     pub visits: u32,
     pub votes: u32,
+}
+
+
+#[derive(Deserialize,Debug,Serialize)]
+enum Roles {
+    AM,
+    FM,
+    FM2,
+    XM,
+    Bot,
+    Non,
+    #[serde(other)]
+    Unknown
+}
+
+
+
+#[derive(Deserialize,Debug,Serialize)]
+pub struct Player {
+    uuid:String,
+    name:String,
+    rank:Roles,
+    world:String
+    
+}
+
+
+impl Player {
+    pub async fn get_worlds(&self) -> Result<Vec<World>,Error> {
+        let mut client = Client::new();
+        client.get_player_worlds_by_uuid(&self.uuid).await
+    }
 }

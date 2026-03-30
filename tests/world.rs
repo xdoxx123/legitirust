@@ -1,4 +1,4 @@
-use legitirust::{client::Client};
+use legitirust::client::Client;
 
 #[tokio::test]
 async fn fetch_test_world() {
